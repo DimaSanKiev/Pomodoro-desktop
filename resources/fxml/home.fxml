@@ -33,9 +33,9 @@
                             <children>
                                 <HBox styleClass="svg-container">
                                     <SVGPath styleClass="svg"
-                                             content="M10.2 17c-1 0-1.8-.8-1.8-1.8V1.8c0-1 .8-1.8 1.8-1.8S12 .8 12 1.8v13.4c0 1-.8 1.8-1.8 1.8z" />
+                                             content="M10.2 17c-1 0-1.8-.8-1.8-1.8V1.8c0-1 .8-1.8 1.8-1.8S12 .8 12 1.8v13.4c0 1-.8 1.8-1.8 1.8z"/>
                                     <SVGPath styleClass="svg"
-                                             content="M10.2 17c-1 0-1.8-.8-1.8-1.8V1.8c0-1 .8-1.8 1.8-1.8S12 .8 12 1.8v13.4c0 1-.8 1.8-1.8 1.8z" />
+                                             content="M10.2 17c-1 0-1.8-.8-1.8-1.8V1.8c0-1 .8-1.8 1.8-1.8S12 .8 12 1.8v13.4c0 1-.8 1.8-1.8 1.8z"/>
                                 </HBox>
                                 <Button text="Pause"/>
                             </children>
