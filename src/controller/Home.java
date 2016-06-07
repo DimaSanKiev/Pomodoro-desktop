@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.Attempt;
@@ -18,6 +20,9 @@ public class Home {
 
     @FXML
     private Label title;
+
+    @FXML
+    private TextArea message;
 
     private Attempt mCurrentAttempt;
     private StringProperty mTimerText;
@@ -47,7 +52,7 @@ public class Home {
     }
 
     private void prepareAttempt(AttemptKind kind) {
-        clearAttemptStyles();
+        reset();
         mCurrentAttempt = new Attempt(kind, "");
         addAttemptStyle(kind);
         title.setText(kind.getDisplayName());
@@ -59,6 +64,23 @@ public class Home {
             mCurrentAttempt.tick();
             setTimerText(mCurrentAttempt.getRemainingSeconds());
         }));
+        mTimeLine.setOnFinished(e -> {
+            saveCurrentAttempt();
+            prepareAttempt(mCurrentAttempt.getKind() == AttemptKind.FOCUS ?
+                    AttemptKind.BREAK : AttemptKind.FOCUS);
+        });
+    }
+
+    private void saveCurrentAttempt() {
+        mCurrentAttempt.setMessage(message.getText());
+        mCurrentAttempt.save();
+    }
+
+    private void reset() {
+        clearAttemptStyles();
+        if (mTimeLine != null && mTimeLine.getStatus() == Animation.Status.RUNNING) {
+            mTimeLine.stop();
+        }
     }
 
     public void playTimer() {
