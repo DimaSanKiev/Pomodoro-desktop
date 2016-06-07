@@ -1,11 +1,14 @@
 package controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import model.Attempt;
 import model.AttemptKind;
 
@@ -18,6 +21,7 @@ public class Home {
 
     private Attempt mCurrentAttempt;
     private StringProperty mTimerText;
+    private Timeline mTimeLine;
 
     public Home() {
         mTimerText = new SimpleStringProperty();
@@ -48,6 +52,21 @@ public class Home {
         addAttemptStyle(kind);
         title.setText(kind.getDisplayName());
         setTimerText(mCurrentAttempt.getRemainingSeconds());
+        // TODO: csd This is creating multiple timelines, need to fix this!
+        mTimeLine = new Timeline();
+        mTimeLine.setCycleCount(kind.getTotalSeconds());
+        mTimeLine.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -> {
+            mCurrentAttempt.tick();
+            setTimerText(mCurrentAttempt.getRemainingSeconds());
+        }));
+    }
+
+    public void playTimer() {
+        mTimeLine.play();
+    }
+
+    public void pauseTimer() {
+        mTimeLine.pause();
     }
 
     private void addAttemptStyle(AttemptKind kind) {
@@ -62,5 +81,10 @@ public class Home {
 
     public void DEBUG(ActionEvent actionEvent) {
         System.out.println("HELLO");
+    }
+
+    public void handleRestart(ActionEvent actionEvent) {
+        prepareAttempt(AttemptKind.FOCUS);
+        playTimer();
     }
 }
