@@ -60,7 +60,6 @@ public class Home {
         addAttemptStyle(kind);
         title.setText(kind.getDisplayName());
         setTimerText(mCurrentAttempt.getRemainingSeconds());
-        // TODO: csd This is creating multiple timelines, need to fix this!
         mTimeLine = new Timeline();
         mTimeLine.setCycleCount(kind.getTotalSeconds());
         mTimeLine.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -> {
@@ -110,7 +109,7 @@ public class Home {
 
     public void handleRestart(ActionEvent actionEvent) {
         prepareAttempt(AttemptKind.FOCUS);
-        playTimer();
+        pauseTimer();
     }
 
     public void handlePlay(ActionEvent actionEvent) {
