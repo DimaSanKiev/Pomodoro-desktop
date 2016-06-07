@@ -6,11 +6,11 @@ public enum AttemptKind {
 
     private int mTotalSeconds;
 
-    AttemptKind(int mTotalSeconds) {
-        this.mTotalSeconds = mTotalSeconds;
+    AttemptKind(int totalSeconds) {
+        mTotalSeconds = totalSeconds;
     }
 
-    public int getmTotalSeconds() {
+    public int getTotalSeconds() {
         return mTotalSeconds;
     }
 }

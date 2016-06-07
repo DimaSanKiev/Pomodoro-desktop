@@ -8,22 +8,22 @@ public class Attempt {
     public Attempt(AttemptKind kind, String message) {
         mKind = kind;
         mMessage = message;
-        mRemainingSeconds = kind.getmTotalSeconds();
+        mRemainingSeconds = kind.getTotalSeconds();
     }
 
-    public String getmMessage() {
+    public String getMessage() {
         return mMessage;
     }
 
-    public int getmRemainingSeconds() {
+    public int getRemainingSeconds() {
         return mRemainingSeconds;
     }
 
-    public AttemptKind getmKind() {
+    public AttemptKind getKind() {
         return mKind;
     }
 
-    public void setmMessage(String mMessage) {
-        this.mMessage = mMessage;
+    public void setMessage(String message) {
+        mMessage = message;
     }
 }
